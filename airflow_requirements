@@ -3,3 +3,4 @@ mysql
 postgres
 slack
 ssh
+google_auth
