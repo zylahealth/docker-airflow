@@ -17,7 +17,6 @@ dnspython==1.16.0
 docutils==0.15.2
 eventlet==0.25.1
 Flask==1.1.1
-Flask-OAuthlib==0.9.5
 future==0.18.1
 greenlet==0.4.15
 idna==2.8
@@ -28,7 +27,6 @@ josepy==1.2.0
 MarkupSafe==1.1.1
 mock==3.0.5
 monotonic==1.5
-oauthlib==2.1.0
 parsedatetime==2.4
 psycopg2-binary==2.8.4
 pyasn1==0.4.7
@@ -41,7 +39,6 @@ python-dateutil==2.8.0
 pytz==2019.3
 PyYAML==5.1.2
 requests==2.22.0
-requests-oauthlib==1.2.0
 requests-toolbelt==0.9.1
 rsa==3.4.2
 s3transfer==0.2.1
