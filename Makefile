@@ -1,5 +1,8 @@
 AIRFLOW_DEPS = $(shell sed -e :a -e '$!N; s/\n/,/; ta' airflow_requirements)
 PYTHON_DEPS := $(shell sed -e :a -e '$!N; s/\n/ /; ta' pip_requirements)
+PLUGINS = `cat plugin_requirements`
+WORK_DIR = $(shell pwd)
+PLUGINS_DIR = $(WORK_DIR)/plugins/
 OWNER = feature
 REPOSITORY = 685249416972.dkr.ecr.ap-south-1.amazonaws.com/$(OWNER)
 APP_NAME = airflow
@@ -13,7 +16,24 @@ TAG_VERSION = $(REPOSITORY)/$(APP_NAME):$(APP_VERSION)
 TAG_GLOBAL = $(REPOSITORY)/$(APP_NAME):$(GLOBAL_VERSION)
 
 
-build_docker:
+clean_plugin_dir:
+	if [ -d $(PLUGINS_DIR) ]; then\
+		rm -rvf $(PLUGINS_DIR);\
+	fi
+
+
+check_plugin_dir: clean_plugin_dir
+	mkdir $(PLUGINS_DIR)
+
+
+fetch_plugins: check_plugin_dir
+	for i in $(PLUGINS); do \
+		cd "$(PLUGINS_DIR)"; \
+		$(GIT) clone $${i}; \
+    done
+
+
+build_docker: fetch_plugins
 	$(DOCKER) build --build-arg AIRFLOW_DEPS="$(AIRFLOW_DEPS)" --build-arg PYTHON_DEPS="$(PYTHON_DEPS)" -t $(TAG_VERSION) -t $(TAG_GLOBAL) .
 
 run_docker:
@@ -22,3 +42,5 @@ run_docker:
 push_docker: build_docker
 	$(DOCKER) push $(TAG_VERSION)
 	$(DOCKER) push $(TAG_GLOBAL)
+
+.ONESHELL:
