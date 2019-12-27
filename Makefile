@@ -18,7 +18,7 @@ TAG_GLOBAL = $(REPOSITORY)/$(APP_NAME):$(GLOBAL_VERSION)
 
 clean_plugin_dir:
 	if [ -d $(PLUGINS_DIR) ]; then\
-		rm -rvf $(PLUGINS_DIR);\
+		rm -rvf $(PLUGINS_DIR)*;\
 	fi
 
 
@@ -39,7 +39,7 @@ build_docker: fetch_plugins
 run_docker:
 	$(DOCKER) run -d -p 8080:8080 --env-file env $(TAG_GLOBAL)
 
-push_docker: build_docker
+push_docker: clean_plugin_dir build_docker
 	$(DOCKER) push $(TAG_VERSION)
 	$(DOCKER) push $(TAG_GLOBAL)
 
