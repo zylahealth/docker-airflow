@@ -31,6 +31,8 @@ fetch_plugins: check_plugin_dir
 		cd "$(PLUGINS_DIR)"; \
 		$(GIT) clone $${i}; \
     done
+	cd "$(WORK_DIR)"
+	tar -cvf plugins.tar plugins/*
 
 
 build_docker: fetch_plugins
