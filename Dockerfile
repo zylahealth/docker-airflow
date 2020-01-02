@@ -82,5 +82,6 @@ EXPOSE 8080 5555 8793
 
 USER airflow
 WORKDIR ${AIRFLOW_USER_HOME}
+ADD plugins.tar .
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["webserver"]
