@@ -23,7 +23,7 @@ clean_plugin_dir:
 
 
 check_plugin_dir: clean_plugin_dir
-	mkdir $(PLUGINS_DIR)
+	mkdir -p $(PLUGINS_DIR)
 
 
 fetch_plugins: check_plugin_dir
