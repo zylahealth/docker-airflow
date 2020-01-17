@@ -35,7 +35,7 @@ fetch_plugins: check_plugin_dir
 	tar -cvf plugins.tar plugins/*
 
 
-build_docker: fetch_plugins
+build_docker:
 	$(DOCKER) build --build-arg AIRFLOW_DEPS="$(AIRFLOW_DEPS)" --build-arg PYTHON_DEPS="$(PYTHON_DEPS)" -t $(TAG_VERSION) -t $(TAG_GLOBAL) .
 
 run_docker:
