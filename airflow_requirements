@@ -4,3 +4,4 @@ postgres
 slack
 ssh
 google_auth
+gcp
